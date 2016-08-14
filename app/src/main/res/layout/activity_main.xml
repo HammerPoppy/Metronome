@@ -20,27 +20,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/period"
+                android:id="@+id/tvPeriod"
+                android:layout_gravity="center_horizontal" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="@string/period"
-                    android:id="@+id/tvPeriod" />
+            <NumberPicker
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/npPeriod"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp" />
 
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="time"
-                    android:ems="2"
-                    android:layout_marginLeft="10dp"
-                    android:id="@+id/etPeriod" />
-            </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_metronome"
+                android:id="@+id/bStartMetronome"
+                android:layout_gravity="center_horizontal" />
+
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

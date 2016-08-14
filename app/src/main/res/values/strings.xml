@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Metronome</string>
-    <string name="period">Period in seconds</string>>
+    <string name="period">Period in seconds</string>
+    <string name="start_metronome">Start metronome</string>
+    <string name="period_alert_dialog_title">Invalid period</string>
+    <string name="period_alert_dialog_message">The period must be a positive number. Please, change the period.</string>
+    <string name="period_alert_dialog_neutral">OK</string>
 </resources>
