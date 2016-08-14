@@ -22,11 +22,8 @@
     </layouts>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21929c18-0a3a-45d9-a585-915ced1fd599" name="Default" comment="Added TODOs. Created new MetronomActivity.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_4_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_4_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_4_0.xml" />
+    <list default="true" id="21929c18-0a3a-45d9-a585-915ced1fd599" name="Default" comment="Android Studio's edit. ))">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
     </list>
     <ignored path="Metronome.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -2086,7 +2083,13 @@
       <option name="project" value="LOCAL" />
       <updated>1471133697816</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Android Studio's edit. ))">
+      <created>1471138437159</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1471138437159</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -2146,7 +2149,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added text view and edit text for period (in seconds) on main activity." />
     <MESSAGE value="Added TODOs. Created new MetronomActivity." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added TODOs. Created new MetronomActivity." />
+    <MESSAGE value="Android Studio's edit. ))" />
+    <option name="LAST_COMMIT_MESSAGE" value="Android Studio's edit. ))" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
