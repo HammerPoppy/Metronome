@@ -1,21 +1,66 @@
 package hammak.metronome;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
-public class MetronomeActivity extends AppCompatActivity {
+import java.util.Timer;
+import java.util.TimerTask;
 
-    int periodSec;
+public class MetronomeActivity extends AppCompatActivity implements OnClickListener {
+
+    Button bStop;
+
+    float periodSec;
+    boolean shouldTick;
+    SoundPool sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_metronome);
-        // TODO: 14.08.2016 New tread for sounds and delays
+
+        bStop = (Button) findViewById(R.id.bStop);
+        if (bStop != null)
+            bStop.setOnClickListener(this);
 
         Intent fromMainActivity = getIntent();
+        periodSec = fromMainActivity.getFloatExtra("periodSec", 2);
 
-        periodSec = fromMainActivity.getIntExtra("periodSec", 2);
+        shouldTick = true;
+
+        final long periodMSec = (long) periodSec * 1000;
+
+        final Thread metronome = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);
+                Context mContext = getApplicationContext();
+                final int soundId = sp.load(mContext, R.raw.metronome_click_hq, 1);
+
+                while (shouldTick){
+                    try {
+                        sp.play(soundId, 1, 1, 0, 0, 1);
+                        Thread.sleep(periodMSec);
+                    } catch (InterruptedException e) {
+
+                    }
+                }
+            }
+        });
+        metronome.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        shouldTick = false;
+        finish();
     }
 }

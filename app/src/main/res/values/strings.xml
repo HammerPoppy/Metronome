@@ -11,4 +11,5 @@
     <string name="set_period_dialog_sec">sec</string>
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
+    <string name="stop_metronome">Stop Metronome</string>
 </resources>

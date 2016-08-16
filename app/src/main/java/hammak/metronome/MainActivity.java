@@ -1,6 +1,7 @@
 package hammak.metronome;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,9 +16,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     TextView tvPeriodText, tvPeriodValue;
     Button bStartMetronome, bSetPeriod;
-    SetPeriodDialog dfPeriodAlert;
 
-    float periodSec;
+    float periodSec = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,5 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onComplete(Float periodSec) {
         tvPeriodValue.setText(Float.toString(periodSec));
+        this.periodSec = periodSec;
     }
 }
