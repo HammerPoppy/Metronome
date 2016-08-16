@@ -22,6 +22,8 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     boolean shouldTick;
     SoundPool sp;
 
+    Thread metronome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +40,19 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
 
         final long periodMSec = (long) periodSec * 1000;
 
-        final Thread metronome = new Thread(new Runnable() {
+        metronome = new Thread(new Runnable() {
             @Override
             public void run() {
                 sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);
                 Context mContext = getApplicationContext();
                 final int soundId = sp.load(mContext, R.raw.metronome_click_hq, 1);
 
-                while (shouldTick){
-                    try {
-                        sp.play(soundId, 1, 1, 0, 0, 1);
+                while (shouldTick) {
+                    try {sp.play(soundId, 1, 1, 0, 0, 1);
                         Thread.sleep(periodMSec);
-                    } catch (InterruptedException e) {
-
+                    }
+                    catch (InterruptedException e) {
+                        return;
                     }
                 }
             }
@@ -61,6 +63,13 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onClick(View v) {
         shouldTick = false;
+        metronome.interrupt();
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        metronome.interrupt();
     }
 }
