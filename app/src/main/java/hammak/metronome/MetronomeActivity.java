@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +20,10 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     Button bStop;
 
     float periodSec;
-    boolean shouldTick;
     SoundPool sp;
+
+    boolean shouldTick;
+    boolean shouldVibrate;
 
     Thread metronome;
 
@@ -34,21 +37,35 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
             bStop.setOnClickListener(this);
 
         Intent fromMainActivity = getIntent();
-        periodSec = fromMainActivity.getFloatExtra("periodSec", 2);
-
-        shouldTick = true;
+        periodSec = fromMainActivity.getFloatExtra("periodSec", 1);
+        shouldTick = fromMainActivity.getBooleanExtra("shouldTick", true);
+        shouldVibrate = fromMainActivity.getBooleanExtra("shouldVibrate", false);
 
         final long periodMSec = (long) periodSec * 1000;
 
         metronome = new Thread(new Runnable() {
             @Override
             public void run() {
-                sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);
+
                 Context mContext = getApplicationContext();
-                final int soundId = sp.load(mContext, R.raw.metronome_click_hq, 1);
+
+                int soundId = 0;
+                if (shouldTick){
+                    sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 1);
+                    soundId = sp.load(mContext, R.raw.metronome_click_hq, 1);
+                }
+
+                Vibrator v = null;
+                if (shouldVibrate){
+                    v = (Vibrator) mContext.getSystemService(VIBRATOR_SERVICE);
+                }
 
                 while (shouldTick) {
-                    try {sp.play(soundId, 1, 1, 0, 0, 1);
+                    try {
+                        if (shouldTick)
+                            sp.play(soundId, 1, 1, 0, 0, 1);
+                        if (shouldVibrate)
+                            v.vibrate(420);
                         Thread.sleep(periodMSec);
                     }
                     catch (InterruptedException e) {
@@ -63,6 +80,7 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onClick(View v) {
         shouldTick = false;
+        shouldVibrate = false;
         metronome.interrupt();
         finish();
     }
@@ -70,6 +88,8 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        shouldTick = false;
+        shouldVibrate = false;
         metronome.interrupt();
     }
 }

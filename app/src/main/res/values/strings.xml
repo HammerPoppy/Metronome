@@ -12,4 +12,6 @@
     <string name="cancel">Cancel</string>
     <string name="apply">Apply</string>
     <string name="stop_metronome">Stop Metronome</string>
+    <string name="cb_sound">Turn on sound</string>
+    <string name="cb_vibration">Turn on vibration</string>
 </resources>
