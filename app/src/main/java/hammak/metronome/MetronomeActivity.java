@@ -38,9 +38,8 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
 
         Intent fromMainActivity = getIntent();
         periodSec = fromMainActivity.getFloatExtra("periodSec", 1);
-
-        shouldTick = true;
-        shouldVibrate = true;
+        shouldTick = fromMainActivity.getBooleanExtra("shouldTick", true);
+        shouldVibrate = fromMainActivity.getBooleanExtra("shouldVibrate", false);
 
         final long periodMSec = (long) periodSec * 1000;
 
@@ -81,6 +80,7 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onClick(View v) {
         shouldTick = false;
+        shouldVibrate = false;
         metronome.interrupt();
         finish();
     }
@@ -88,6 +88,8 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        shouldTick = false;
+        shouldVibrate = false;
         metronome.interrupt();
     }
 }
