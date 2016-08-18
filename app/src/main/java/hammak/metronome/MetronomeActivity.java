@@ -19,7 +19,7 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
 
     Button bStop;
 
-    float periodSec;
+    long periodMSec;
     SoundPool sp;
 
     boolean shouldTick;
@@ -37,11 +37,9 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
             bStop.setOnClickListener(this);
 
         Intent fromMainActivity = getIntent();
-        periodSec = fromMainActivity.getFloatExtra("periodSec", 1);
+        periodMSec = fromMainActivity.getLongExtra("periodMSec", 1);
         shouldTick = fromMainActivity.getBooleanExtra("shouldTick", true);
         shouldVibrate = fromMainActivity.getBooleanExtra("shouldVibrate", false);
-
-        final long periodMSec = (long) periodSec * 1000;
 
         metronome = new Thread(new Runnable() {
             @Override
@@ -65,7 +63,7 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
                         if (shouldTick)
                             sp.play(soundId, 1, 1, 0, 0, 1);
                         if (shouldVibrate)
-                            v.vibrate(420);
+                            v.vibrate(100);
                         Thread.sleep(periodMSec);
                     }
                     catch (InterruptedException e) {
