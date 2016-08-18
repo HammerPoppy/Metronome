@@ -60,7 +60,7 @@ public class MetronomeActivity extends AppCompatActivity implements OnClickListe
                     v = (Vibrator) mContext.getSystemService(VIBRATOR_SERVICE);
                 }
 
-                while (shouldTick) {
+                while (shouldTick || shouldVibrate) {
                     try {
                         if (shouldTick)
                             sp.play(soundId, 1, 1, 0, 0, 1);
