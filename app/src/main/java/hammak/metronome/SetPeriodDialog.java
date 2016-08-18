@@ -18,7 +18,7 @@ import com.shawnlin.numberpicker.NumberPicker;
 public class SetPeriodDialog extends DialogFragment implements OnClickListener {
 
     NumberPicker npInteger, npFractional;
-    float periodSec;
+    long periodMSec;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener {
      }
 
     public static interface OnCompleteListener {
-        public abstract void onComplete(Float periodSec);
+        public abstract void onComplete(long periodMSec);
     }
 
     @Override
@@ -48,8 +48,8 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener {
                 dismiss();
                 break;
             case R.id.bApply:
-                periodSec = (float) (npInteger.getValue() + (npFractional.getValue() * 0.1));
-                mListener.onComplete(periodSec);
+                periodMSec = (long) ((npInteger.getValue() * 1000) + (npFractional.getValue() * 100));
+                mListener.onComplete(periodMSec);
                 dismiss();
                 break;
         }

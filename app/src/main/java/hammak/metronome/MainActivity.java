@@ -1,7 +1,6 @@
 package hammak.metronome;
 
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bStartMetronome, bSetPeriod;
     CheckBox cbSound, cbVibration;
 
-    float periodSec = 1;
+    long periodMSec = 1000;
     boolean shouldTick;
     boolean shouldVibrate;
 
@@ -51,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 shouldVibrate = cbVibration.isChecked();
                 toMetronomeActivity.putExtra("shouldTick", shouldTick);
                 toMetronomeActivity.putExtra("shouldVibrate", shouldVibrate);
-                toMetronomeActivity.putExtra("periodSec", periodSec);
+                toMetronomeActivity.putExtra("periodMSec", periodMSec);
                 startActivity(toMetronomeActivity);
                 break;
             case R.id.bSetPeriod:
@@ -61,8 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onComplete(Float periodSec) {
+    public void onComplete(long periodMSec) {
+        this.periodMSec = periodMSec;
+        float periodSec = periodMSec;
+        periodSec = periodSec / 1000;
         tvPeriodValue.setText(Float.toString(periodSec));
-        this.periodSec = periodSec;
     }
 }
