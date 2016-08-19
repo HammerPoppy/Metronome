@@ -14,4 +14,8 @@
     <string name="stop_metronome">Stop Metronome</string>
     <string name="cb_sound">Turn on sound</string>
     <string name="cb_vibration">Turn on vibration</string>
+    <string name="tpm">TPM:</string>
+    <string name="tpm_default_value">60</string>
+    <string name="set_tpm">Set TPM</string>
+    <string name="tpm_dialogue">TPM</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.shawnlin.numberpicker.NumberPicker;
 
@@ -15,24 +16,22 @@ import com.shawnlin.numberpicker.NumberPicker;
 *Created by Hammak on 14.08.2016 for Metronome.
 */
 
-public class SetPeriodDialog extends DialogFragment implements OnClickListener,
-        android.widget.NumberPicker.OnValueChangeListener {
+public class SetTPMDialog extends DialogFragment implements OnClickListener {
 
-    NumberPicker npInteger, npFractional;
+    NumberPicker npTPM;
+    TextView tvTPM;
+
     long periodMSec;
+    int TPM;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getDialog().setTitle("Set Period");
-        View v = inflater.inflate(R.layout.set_period_dialog, null);
+        getDialog().setTitle("Set Ticks Per Minute");
+        View v = inflater.inflate(R.layout.set_tpm_dialog, null);
 
-        v.findViewById(R.id.tvComa);
-        v.findViewById(R.id.tvSec);
+        tvTPM = (TextView) v.findViewById(R.id.tvTPM);
 
-        npInteger = (NumberPicker) v.findViewById(R.id.npInteger);
-        npFractional = (NumberPicker) v.findViewById(R.id.npFractional);
-
-        npInteger.setOnValueChangedListener(this);
+        npTPM = (NumberPicker) v.findViewById(R.id.npTPM);;
 
         v.findViewById(R.id.bCancel).setOnClickListener(this);
         v.findViewById(R.id.bApply).setOnClickListener(this);
@@ -40,18 +39,8 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener,
         return v;
      }
 
-    @Override
-    public void onValueChange(android.widget.NumberPicker picker, int oldVal, int newVal) {
-        if (newVal == 0){
-            npFractional.setMinValue(3);
-        }
-        else if (oldVal == 0){
-            npFractional.setMinValue(0);
-        }
-    }
-
     public interface OnCompleteListener {
-        void onComplete(long periodMSec);
+        void onComplete(int TPM);
     }
 
     @Override
@@ -61,8 +50,8 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener,
                 dismiss();
                 break;
             case R.id.bApply:
-                periodMSec = (long) ((npInteger.getValue() * 1000) + (npFractional.getValue() * 100));
-                mListener.onComplete(periodMSec);
+                TPM = npTPM.getValue();
+                mListener.onComplete(TPM);
                 dismiss();
                 break;
         }
@@ -70,7 +59,7 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener,
 
     private OnCompleteListener mListener;
 
-    // make sure the Activity implemented it
+    //Make sure the Activity implemented it
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

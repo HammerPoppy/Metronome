@@ -9,13 +9,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import hammak.metronome.SetPeriodDialog.OnCompleteListener;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        OnCompleteListener {
+        SetPeriodDialog.OnCompleteListener, SetTPMDialog.OnCompleteListener {
 
-    TextView tvPeriodText, tvPeriodValue;
-    Button bStartMetronome, bSetPeriod;
+    TextView tvPeriodText, tvPeriodValue, tvTPMText, tvTPMValue;
+    Button bStartMetronome, bSetPeriod, bSetTPM;
     CheckBox cbSound, cbVibration;
 
     long periodMSec = 1000;
@@ -29,12 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvPeriodText = (TextView) findViewById(R.id.tvPeriodText);
         tvPeriodValue = (TextView) findViewById(R.id.tvPeriodValue);
+        tvTPMText = (TextView) findViewById(R.id.tvTPMText);
+        tvTPMValue = (TextView) findViewById(R.id.tvTPMValue);
 
         bStartMetronome = (Button) findViewById(R.id.bStartMetronome);
         bSetPeriod = (Button) findViewById(R.id.bSetPeriod);
+        bSetTPM = (Button) findViewById(R.id.bSetTPM);
 
         bStartMetronome.setOnClickListener(this);
         bSetPeriod.setOnClickListener(this);
+        bSetTPM.setOnClickListener(this);
 
         cbSound = (CheckBox) findViewById(R.id.cbSound);
         cbVibration = (CheckBox) findViewById(R.id.cbVibration);
@@ -56,14 +61,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bSetPeriod:
                 DialogFragment setPeriodDialog = new SetPeriodDialog();
                 setPeriodDialog.show(getFragmentManager(), setPeriodDialog.getClass().getName());
+                break;
+            case R.id.bSetTPM:
+                DialogFragment setTPMDialog = new SetTPMDialog();
+                setTPMDialog.show(getFragmentManager(), setTPMDialog.getClass().getName());
+                break;
         }
     }
 
     @Override
     public void onComplete(long periodMSec) {
+        setPeriodAndTPM(periodMSec);
+    }
+
+    @Override
+    public void onComplete(int TPM) {
+        long periodMSec = (long) 60000 / TPM;
+        setPeriodAndTPM(periodMSec);
+    }
+
+    public void setPeriodAndTPM(long periodMSec){
         this.periodMSec = periodMSec;
-        float periodSec = periodMSec;
-        periodSec = periodSec / 1000;
-        tvPeriodValue.setText(Float.toString(periodSec));
+
+        double doublePeriodSec = (double) periodMSec / 1000;
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+        tvPeriodValue.setText(df.format(doublePeriodSec));
+
+        long tpm = 60000 / periodMSec;
+        tvTPMValue.setText(Long.toString(tpm));
     }
 }
