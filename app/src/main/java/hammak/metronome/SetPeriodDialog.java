@@ -15,7 +15,8 @@ import com.shawnlin.numberpicker.NumberPicker;
 *Created by Hammak on 14.08.2016 for Metronome.
 */
 
-public class SetPeriodDialog extends DialogFragment implements OnClickListener {
+public class SetPeriodDialog extends DialogFragment implements OnClickListener,
+        android.widget.NumberPicker.OnValueChangeListener {
 
     NumberPicker npInteger, npFractional;
     long periodMSec;
@@ -31,11 +32,23 @@ public class SetPeriodDialog extends DialogFragment implements OnClickListener {
         npInteger = (NumberPicker) v.findViewById(R.id.npInteger);
         npFractional = (NumberPicker) v.findViewById(R.id.npFractional);
 
+        npInteger.setOnValueChangedListener(this);
+
         v.findViewById(R.id.bCancel).setOnClickListener(this);
         v.findViewById(R.id.bApply).setOnClickListener(this);
 
         return v;
      }
+
+    @Override
+    public void onValueChange(android.widget.NumberPicker picker, int oldVal, int newVal) {
+        if (newVal == 0){
+            npFractional.setMinValue(3);
+        }
+        else if (oldVal == 0){
+            npFractional.setMinValue(0);
+        }
+    }
 
     public static interface OnCompleteListener {
         public abstract void onComplete(long periodMSec);
