@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+    <com.shawnlin.numberpicker.NumberPicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:np_dividerColor="@color/colorAccent"
+        app:np_min="1"
+        app:np_max="180"
+        android:id="@+id/npTPM"
+        android:orientation="vertical" />
+
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tpm_dialogue"
+        android:id="@+id/tvTPM"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#76CBEA"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#51BFE6"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:id="@+id/bCancel"
+            android:layout_weight="1"
+            style="@android:style/DeviceDefault.Light.ButtonBar.AlertDialog" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/apply"
+            android:id="@+id/bApply"
+            android:layout_weight="1"
+            style="@android:style/DeviceDefault.Light.ButtonBar.AlertDialog" />
+    </LinearLayout>
+
+</LinearLayout>
