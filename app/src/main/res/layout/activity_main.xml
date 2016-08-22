@@ -7,13 +7,15 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="hammak.metronome.MainActivity">
+    tools:context="hammak.metronome.MainActivity"
+    android:baselineAligned="false">
 
 
     <ScrollView
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView" >
+        android:id="@+id/scrollView"
+        android:layout_weight="1">
 
         <LinearLayout
             android:orientation="vertical"
@@ -96,13 +98,40 @@
                 android:text="@string/cb_vibration"
                 android:id="@+id/cbVibration" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load_preferences"
+                    android:id="@+id/bLoad"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/add_preferences"
+                    android:id="@+id/bAdd"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/start_metronome"
                 android:id="@+id/bStartMetronome"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp" />
+                android:layout_gravity="center_horizontal" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/flContainer"></FrameLayout>
 
         </LinearLayout>
     </ScrollView>
