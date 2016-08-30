@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bAdd:
                 fTrans = getFragmentManager().beginTransaction();
-                fTrans.add(R.id.flContainer, savePrefFragment);
+                fTrans.replace(R.id.flContainer, savePrefFragment);
                 fTrans.addToBackStack(null);
                 fTrans.commit();
                 break;
